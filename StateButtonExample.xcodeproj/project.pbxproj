@@ -12,6 +12,7 @@
 		5B004DAA22521CDD00E6BBC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B004DA922521CDD00E6BBC3 /* Assets.xcassets */; };
 		5B004DAD22521CDD00E6BBC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B004DAB22521CDD00E6BBC3 /* LaunchScreen.storyboard */; };
 		5B004DB722521F1900E6BBC3 /* StateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B004DB622521F1900E6BBC3 /* StateButton.swift */; };
+		5BA923FC22538EE500FBC2EE /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA923FB22538EE500FBC2EE /* ColorConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		5B004DAC22521CDD00E6BBC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B004DAE22521CDD00E6BBC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B004DB622521F1900E6BBC3 /* StateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateButton.swift; sourceTree = "<group>"; };
+		5BA923FB22538EE500FBC2EE /* ColorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		5B004DA122521CDB00E6BBC3 /* StateButtonExample */ = {
 			isa = PBXGroup;
 			children = (
+				5BA923FA22538E7100FBC2EE /* Converters */,
 				5B004DA222521CDB00E6BBC3 /* AppDelegate.swift */,
 				5B004DB522521EE600E6BBC3 /* Controls */,
 				5B004DB422521CFB00E6BBC3 /* ViewControllers */,
@@ -78,6 +81,14 @@
 				5B004DB622521F1900E6BBC3 /* StateButton.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		5BA923FA22538E7100FBC2EE /* Converters */ = {
+			isa = PBXGroup;
+			children = (
+				5BA923FB22538EE500FBC2EE /* ColorConverter.swift */,
+			);
+			path = Converters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +163,7 @@
 			files = (
 				5B004DA522521CDB00E6BBC3 /* MainViewController.swift in Sources */,
 				5B004DB722521F1900E6BBC3 /* StateButton.swift in Sources */,
+				5BA923FC22538EE500FBC2EE /* ColorConverter.swift in Sources */,
 				5B004DA322521CDB00E6BBC3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

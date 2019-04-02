@@ -42,30 +42,12 @@ class MainViewController: UIViewController, StateButtonDelegate {
         let builder = StateButtonBuilder().addDelegate(self)
         for index in 1...amount {
             let color = colors[index-1]
-            builder.addState(color: color, text: getColor(color))
+            builder.addState(color: color, text: ColorConverter.getColor(color))
         }
         let stateButton = builder.build()
         view.addSubview(stateButton)
         return stateButton
     }
-    
-    /// This function get String color name, from UIColor. This color must be in base colors.
-    /// - parameters: color - color for which you are getting String name
-    /// - returns: String - string representation of Color
-    
-    private func getColor(_ color: UIColor) -> String {
-        let colors = [UIColor.red:"red", UIColor.blue:"blue", UIColor.yellow:"yellow", UIColor.green:"green"]
-        var colorString = ""
-        if colors.keys.contains(color){
-            colorString = colors[color]!
-        }
-        if colorString != "" {
-            return colorString
-        } else {
-            fatalError("There is no such color in base colors")
-        }
-    }
-    
     
     // MARK: - Delegate functions
     
