@@ -8,11 +8,17 @@
 
 import UIKit
 
+
+/// Delegate protocol for StateButton. It has 2 functions.
+/// -stateButtonBeforeChange - called when touch event on stateButton is detected. State change will start afterwards
+/// -stateButtonAfterChange - called when state of button was changed.
 protocol StateButtonDelegate: class {
     func stateButtonBeforeChange(_ sender: StateButton, _ id: Int)
     func stateButtonAfterChange(_ sender: StateButton, _ id: Int)
 }
 
+
+/// Model for StateData
 fileprivate struct StateData {
     let color: UIColor
     let text: String
@@ -20,11 +26,13 @@ fileprivate struct StateData {
 
 class StateButton: UIControl {
     
-    fileprivate var states: [StateData]?
+    private var states: [StateData]?
     weak var delegate: StateButtonDelegate?
-    private var id: Int = 0
+    private var id: Int = 0  /// id of current state
     let label = UILabel()
     
+    
+    /// Initializer function for StateButton. It cann't be used directly. You have to use StateButtonBuilder class
     fileprivate init(_ frame: CGRect,_ delegate: StateButtonDelegate?, _ states: [StateData]) {
         super.init(frame: frame)
         self.states = states
@@ -33,7 +41,7 @@ class StateButton: UIControl {
         updateView()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    internal required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -43,6 +51,8 @@ class StateButton: UIControl {
         delegate?.stateButtonAfterChange(self, id)
     }
     
+    
+    /// Adds configured label to the view
     private func addLabel() {
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.textColor = .black
@@ -50,6 +60,8 @@ class StateButton: UIControl {
         self.addSubview(label)
     }
     
+    
+    /// Update View with state of current id
     private func updateView() {
         if let state = states?[id] {
             label.text = state.text
@@ -57,6 +69,8 @@ class StateButton: UIControl {
         }
     }
     
+    
+    /// Update id of current state
     private func changeState() {
         if id != states!.count - 1 {
             id += 1
@@ -68,16 +82,21 @@ class StateButton: UIControl {
     
 }
 
+/// Builder class for StateButton
 class StateButtonBuilder {
     fileprivate var states = [StateData]()
     var delegate: StateButtonDelegate?
     let frame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     
+    
+    /// Add delegate to stateButton. If it's not provided, the delegate method will not work
     func addDelegate(_ delegate: StateButtonDelegate) -> StateButtonBuilder {
         self.delegate = delegate
         return self
     }
     
+    
+    /// Add state to the StateButton with given color and text
     func addState(color: UIColor, text: String) -> StateButtonBuilder {
         self.states.append(StateData(color: color, text: text))
         return self

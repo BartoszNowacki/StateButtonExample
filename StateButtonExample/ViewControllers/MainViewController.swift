@@ -13,10 +13,12 @@ class MainViewController: UIViewController, StateButtonDelegate {
     var firstStateButton: StateButton?
     var secondStateButton: StateButton?
     
+    // MARK: - Lifecycle functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        addFirstStateButton()
-        addSecondStateButton()
+        firstStateButton = addStateButton(with: 3)
+        secondStateButton = addStateButton(with: 4)
     }
     
     
@@ -29,26 +31,43 @@ class MainViewController: UIViewController, StateButtonDelegate {
                                          width: width, height: 31.0)
     }
     
-    private func addFirstStateButton() {
-        firstStateButton = StateButtonBuilder()
-            .addDelegate(self)
-            .addState(color: .blue, text: "First")
-            .addState(color: .green, text: "Second")
-            .addState(color: .yellow, text: "Third")
-            .build()
-        view.addSubview(firstStateButton!)
+    // MARK: - ViewController functions
+    
+    /// Adds new instance of StateButton, with colors from array list, and their string representation as a text. It also adds this istance as a subview of view.
+    /// - parameters: amount - amount of states you want to have
+    /// - returns: StateButton instance.
+    
+    private func addStateButton(with amount: Int) -> StateButton {
+        let colors: [UIColor] = [.blue, .red, .green, .yellow]
+        let builder = StateButtonBuilder().addDelegate(self)
+        for index in 1...amount {
+            let color = colors[index-1]
+            builder.addState(color: color, text: getColor(color))
+        }
+        let stateButton = builder.build()
+        view.addSubview(stateButton)
+        return stateButton
     }
     
-    private func addSecondStateButton() {
-        secondStateButton = StateButtonBuilder()
-            .addDelegate(self)
-            .addState(color: .blue, text: "First")
-            .addState(color: .green, text: "Second")
-            .addState(color: .yellow, text: "Third")
-            .addState(color: .red, text: "Fourth")
-            .build()
-        view.addSubview(secondStateButton!)
+    /// This function get String color name, from UIColor. This color must be in base colors.
+    /// - parameters: color - color for which you are getting String name
+    /// - returns: String - string representation of Color
+    
+    private func getColor(_ color: UIColor) -> String {
+        let colors = [UIColor.red:"red", UIColor.blue:"blue", UIColor.yellow:"yellow", UIColor.green:"green"]
+        var colorString = ""
+        if colors.keys.contains(color){
+            colorString = colors[color]!
+        }
+        if colorString != "" {
+            return colorString
+        } else {
+            fatalError("There is no such color in base colors")
+        }
     }
+    
+    
+    // MARK: - Delegate functions
     
     func stateButtonBeforeChange(_ sender: StateButton, _ id: Int) {
         print("State is about to change! with sender \(sender) and id \(id)")
